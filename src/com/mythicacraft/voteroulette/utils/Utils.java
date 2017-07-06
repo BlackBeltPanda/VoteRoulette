@@ -37,16 +37,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.material.SpawnEgg;
-import org.bukkit.potion.Potion;
+import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-
 import com.mythicacraft.voteroulette.VoteRoulette;
 import com.mythicacraft.voteroulette.Voter;
 import com.mythicacraft.voteroulette.Voter.Stat;
@@ -58,7 +52,6 @@ import com.mythicacraft.voteroulette.awards.ItemPrize;
 import com.mythicacraft.voteroulette.awards.Milestone;
 import com.mythicacraft.voteroulette.awards.Reward;
 import com.mythicacraft.voteroulette.awards.Reward.VoteStreakModifier;
-import com.mythicacraft.voteroulette.stats.BoardReset;
 import com.mythicacraft.voteroulette.stats.VoterStat;
 import com.mythicacraft.voteroulette.stats.VoterStatSheet.StatType;
 import com.mythicacraft.voteroulette.utils.InteractiveMessageAPI.InteractiveMessageElement.ClickEvent;
@@ -181,8 +174,7 @@ public class Utils {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	public static void showTopScoreboard(final Player player, StatType stat) {
+	/*public static void showTopScoreboard(final Player player, StatType stat) {
 		Utils.debugMessage("opening top 10 in scorebord.");
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		Scoreboard board = manager.getNewScoreboard();
@@ -282,7 +274,7 @@ public class Utils {
 		// cancel button selection after 5 seconds
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		scheduler.scheduleSyncDelayedTask(plugin, new BoardReset(player, board), 300L);
-	}
+	}*/
 
 	public static void showTopInChat(Player player, StatType stat) {
 		List<VoterStat> topStats = null;
@@ -883,19 +875,19 @@ public class Utils {
 			sb.append(is.getAmount() + " ");
 			String itemName = is.getType().toString().toLowerCase().replace("_", " ");
 			if (itemName.equals("monster egg")) {
-				SpawnEgg egg = (SpawnEgg) is.getData();
+				SpawnEggMeta egg = (SpawnEggMeta) is.getItemMeta();
 				itemName = egg.getSpawnedType().toString().toLowerCase().replace("_", " ") + " egg";
 			}
 			if (itemName.equals("potion")) {
 				if (is.getAmount() > 1) {
 					itemName += "s";
 				}
-				Potion potion = Potion.fromItemStack(is);
-				itemName += " of " + potion.getType().toString().toLowerCase().replace("_", " ");
-				if (potion.getLevel() > 1) {
+				PotionMeta potionMeta = (PotionMeta) is.getItemMeta();
+				itemName += " of " + potionMeta.getBasePotionData().getType().toString().toLowerCase().replace("_", " ");
+				if (potionMeta.getBasePotionData().isUpgraded()) {
 					itemName += " II";
 				}
-				if (potion.hasExtendedDuration()) {
+				if (potionMeta.getBasePotionData().isExtended()) {
 					itemName += " (extended)";
 				}
 			}
@@ -970,19 +962,19 @@ public class Utils {
 			sb.append(is.getAmount() + " ");
 			String itemName = is.getType().toString().toLowerCase().replace("_", " ");
 			if (itemName.equals("monster egg")) {
-				SpawnEgg egg = (SpawnEgg) is.getData();
+				SpawnEggMeta egg = (SpawnEggMeta) is.getItemMeta();
 				itemName = egg.getSpawnedType().toString().toLowerCase().replace("_", " ") + " egg";
 			}
 			if (itemName.equals("potion")) {
 				if (is.getAmount() > 1) {
 					itemName += "s";
 				}
-				Potion potion = Potion.fromItemStack(is);
-				itemName += " of " + potion.getType().toString().toLowerCase().replace("_", " ");
-				if (potion.getLevel() > 1) {
+				PotionMeta potionMeta = (PotionMeta) is.getItemMeta();
+				itemName += " of " + potionMeta.getBasePotionData().getType().toString().toLowerCase().replace("_", " ");
+				if (potionMeta.getBasePotionData().isUpgraded()) {
 					itemName += " II";
 				}
-				if (potion.hasExtendedDuration()) {
+				if (potionMeta.getBasePotionData().isExtended()) {
 					itemName += " (extended)";
 				}
 			}

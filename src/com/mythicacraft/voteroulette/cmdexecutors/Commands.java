@@ -117,7 +117,7 @@ public class Commands implements CommandExecutor {
 					if (sender.hasPermission("voteroulette.edititems")) {
 
 						Player p = (Player) sender;
-						ItemStack itemInHand = p.getItemInHand();
+						ItemStack itemInHand = p.getInventory().getItemInMainHand();
 						ItemMeta im = itemInHand.getItemMeta();
 
 						if (itemInHand != null && itemInHand.getType() != Material.AIR) {
@@ -147,7 +147,7 @@ public class Commands implements CommandExecutor {
 				} else if (args[0].equalsIgnoreCase("setlore")) {
 					if (sender.hasPermission("voteroulette.edititems")) {
 						Player p = (Player) sender;
-						ItemStack itemInHand = p.getItemInHand();
+						ItemStack itemInHand = p.getInventory().getItemInMainHand();
 
 						if (itemInHand != null && itemInHand.getType() != Material.AIR) {
 							ItemMeta im = itemInHand.getItemMeta();
@@ -364,11 +364,11 @@ public class Commands implements CommandExecutor {
 							}
 						}
 						if (statType != null) {
-							if (plugin.USE_SCOREBOARD && sender instanceof Player) {
-								Utils.showTopScoreboard((Player) sender, statType);
-							} else {
-								Utils.showTopInChat((Player) sender, statType);
-							}
+							//if (plugin.USE_SCOREBOARD && sender instanceof Player) {
+							//	Utils.showTopScoreboard((Player) sender, statType);
+							//} else {
+							Utils.showTopInChat((Player) sender, statType);
+							//}
 						} else {
 							sender.sendMessage(plugin.BASE_CMD_NOTIFICATION);
 						}
