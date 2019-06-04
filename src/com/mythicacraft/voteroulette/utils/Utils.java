@@ -39,7 +39,6 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.bukkit.scheduler.BukkitScheduler;
 import com.mythicacraft.voteroulette.VoteRoulette;
 import com.mythicacraft.voteroulette.Voter;
@@ -74,6 +73,7 @@ public class Utils {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public static ItemStack[] updateLoreAndCustomNames(String playerName,
 			ItemStack[] items) {
 		ItemStack[] itemsClone = items.clone();
@@ -90,7 +90,7 @@ public class Utils {
 			if (im.hasDisplayName()) {
 				im.setDisplayName(im.getDisplayName().replace("%player%", playerName));
 			}
-			if (item.getType() == Material.SKULL_ITEM && item.getDurability() == 3 /* playerhead */) {
+			if (item.getType() == Material.PLAYER_HEAD) {
 				SkullMeta sim = (SkullMeta) im;
 				if (sim.hasOwner()) {
 					sim.setOwner(sim.getOwner().replace("%player%", playerName));
@@ -102,6 +102,7 @@ public class Utils {
 		return itemsClone;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static ItemStack[] updateLoreAndCustomNamesForItemPrizes(
 			Voter voter, List<ItemPrize> items) {
 		String playerName = voter.getPlayerName();
@@ -136,7 +137,7 @@ public class Utils {
 			if (im.hasDisplayName()) {
 				im.setDisplayName(im.getDisplayName().replace("%player%", playerName));
 			}
-			if (itemP.getType() == Material.SKULL_ITEM && itemP.getDurability() == 3 /* playerhead */) {
+			if (itemP.getType() == Material.PLAYER_HEAD) {
 				SkullMeta sim = (SkullMeta) im;
 				if (sim.hasOwner()) {
 					sim.setOwner(sim.getOwner().replace("%player%", playerName));
@@ -453,7 +454,7 @@ public class Utils {
 			Award award, Voter voter) {
 		awardMessage = awardMessage.replace("%name%", award.getName());
 		awardMessage = awardMessage.replace("%player%", voter.getPlayerName());
-		awardMessage = awardMessage.replace("%server%", Bukkit.getServerName());
+		awardMessage = awardMessage.replace("%server%", Bukkit.getServer().getName());
 
 		if (award.getAwardType() == AwardType.MILESTONE) {
 			awardMessage = awardMessage.replace("%type%", plugin.MILESTONE_DEF.toLowerCase());
@@ -469,7 +470,7 @@ public class Utils {
 		if (!award.hasMessage()) {
 			awardMessage = awardMessage.replace("%name%", award.getName());
 			awardMessage = awardMessage.replace("%player%", voter.getPlayerName());
-			awardMessage = awardMessage.replace("%server%", Bukkit.getServerName());
+			awardMessage = awardMessage.replace("%server%", Bukkit.getServer().getName());
 
 			if (award.getAwardType() == AwardType.MILESTONE) {
 				awardMessage = awardMessage.replace("%type%", plugin.MILESTONE_DEF.toLowerCase());
@@ -532,7 +533,7 @@ public class Utils {
 		String awardsListStr = sb.toString();
 		String summerizeMessage = plugin.PLAYER_AWARDS_SUMMARY_MESSAGE;
 
-		summerizeMessage = summerizeMessage.replace("%names%", awardsListStr).replace("%player%", voter.getPlayerName()).replace("%server%", Bukkit.getServerName()).replace("%prizes%", getSummarizedAwardPrizesString(awards, voter));
+		summerizeMessage = summerizeMessage.replace("%names%", awardsListStr).replace("%player%", voter.getPlayerName()).replace("%server%", Bukkit.getServer().getName()).replace("%prizes%", getSummarizedAwardPrizesString(awards, voter));
 
 		if (awards.get(0) instanceof Milestone) {
 			if (awards.size() > 1) {
@@ -874,10 +875,6 @@ public class Utils {
 			ItemStack is = items[i];
 			sb.append(is.getAmount() + " ");
 			String itemName = is.getType().toString().toLowerCase().replace("_", " ");
-			if (itemName.equals("monster egg")) {
-				SpawnEggMeta egg = (SpawnEggMeta) is.getItemMeta();
-				itemName = egg.getSpawnedType().toString().toLowerCase().replace("_", " ") + " egg";
-			}
 			if (itemName.equals("potion")) {
 				if (is.getAmount() > 1) {
 					itemName += "s";
@@ -961,10 +958,6 @@ public class Utils {
 				continue;
 			sb.append(is.getAmount() + " ");
 			String itemName = is.getType().toString().toLowerCase().replace("_", " ");
-			if (itemName.equals("monster egg")) {
-				SpawnEggMeta egg = (SpawnEggMeta) is.getItemMeta();
-				itemName = egg.getSpawnedType().toString().toLowerCase().replace("_", " ") + " egg";
-			}
 			if (itemName.equals("potion")) {
 				if (is.getAmount() > 1) {
 					itemName += "s";
@@ -1428,7 +1421,7 @@ public class Utils {
 			i.addItem(item);
 		}
 		if (award.hasXpLevels()) {
-			ItemStack xp = new ItemStack(Material.EXP_BOTTLE);
+			ItemStack xp = new ItemStack(Material.EXPERIENCE_BOTTLE);
 			ItemMeta itemMeta = xp.getItemMeta();
 			itemMeta.setDisplayName(ChatColor.YELLOW + Integer.toString(award.getXpLevels()) + ChatColor.RESET + " " + plugin.XPLEVELS_DEF);
 			xp.setItemMeta(itemMeta);
@@ -1442,7 +1435,7 @@ public class Utils {
 			i.addItem(xp);
 		}
 		if (award.hasCommands()) {
-			ItemStack paper = new ItemStack(Material.COMMAND);
+			ItemStack paper = new ItemStack(Material.COMMAND_BLOCK);
 			ItemMeta itemMeta = paper.getItemMeta();
 			itemMeta.setDisplayName(ChatColor.YELLOW + "Runs commands.");
 			List<String> lore = new ArrayList<String>();

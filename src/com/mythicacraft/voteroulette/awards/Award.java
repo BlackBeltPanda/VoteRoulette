@@ -156,26 +156,26 @@ public class Award {
 		if (cs.contains("items")) {
 			ConfigurationSection items = cs.getConfigurationSection("items");
 			if (items != null) {
-				for (String itemID : items.getKeys(false)) {
-					int id;
+				for (String itemName : items.getKeys(false)) {
+					String iName;
 					try {
-						id = Integer.parseInt(itemID);
+						iName = itemName;
 					} catch (Exception e) {
-						System.out.println("[VoteRoulette] \"" + itemID + "\" is not a valid itemID, Skipping!");
+						System.out.println("[VoteRoulette] \"" + itemName + "\" is not a valid itemID, Skipping!");
 						continue;
 					}
-					ConfigurationSection itemData = items.getConfigurationSection(itemID);
+					ConfigurationSection itemData = items.getConfigurationSection(itemName);
 					if (itemData != null) {
 						if (itemData.contains("multiple")) {
 							ConfigurationSection multipleData = itemData.getConfigurationSection("multiple");
 							for (String mItemID : multipleData.getKeys(false)) {
-								ItemPrize mItem = parseConfigItemData(id, multipleData.getConfigurationSection(mItemID));
+								ItemPrize mItem = parseConfigItemData(iName, multipleData.getConfigurationSection(mItemID));
 								if (mItem != null) {
 									this.items.add(mItem);
 								}
 							}
 						} else {
-							ItemPrize item = parseConfigItemData(id, itemData);
+							ItemPrize item = parseConfigItemData(iName, itemData);
 							if (item != null) {
 								this.items.add(item);
 							}
@@ -505,33 +505,16 @@ public class Award {
 	}
 
 	@SuppressWarnings("deprecation")
-	private ItemPrize parseConfigItemData(int itemID,
+	private ItemPrize parseConfigItemData(String itemName,
 			ConfigurationSection itemData) {
 		ItemPrize item = null;
 		ItemMeta itemMeta;
 		if (itemData != null) {
-			if (itemData.contains("dataID")) {
-				String dataIDStr = itemData.getString("dataID");
-				short dataID;
-				try {
-					dataID = Short.parseShort(dataIDStr);
-				} catch (Exception e) {
-					dataID = 1;
-					log.warning("[VoteRoulette] \"" + dataIDStr + "\" is not a valid dataID, Defaulting to 1!");
-				}
-				try {
-					item = new ItemPrize(Material.getMaterial(itemID), 1, dataID);
-				} catch (Exception e) {
-					log.warning("[VoteRoulette] \"" + itemID + "\" is not a recognized itemID, skipping item!");
-					return null;
-				}
-			} else {
-				try {
-					item = new ItemPrize(Material.getMaterial(itemID), 1);
-				} catch (Exception e) {
-					log.warning("[VoteRoulette] \"" + itemID + "\" is not a recognized itemID, skipping item!");
-					return null;
-				}
+			try {
+				item = new ItemPrize(Material.matchMaterial(itemName), 1);
+			} catch (Exception e) {
+				log.warning("[VoteRoulette] \"" + itemName + "\" is not a recognized itemID, skipping item!");
+				return null;
 			}
 			itemMeta = item.getItemMeta();
 			if (itemData.contains("amount")) {
@@ -544,7 +527,7 @@ public class Award {
 				if (testForInt.matches("[0-9]")) {
 					String[] colorValues = colorStr.split(",");
 					if (colorValues.length < 3 || colorValues.length > 3) {
-						System.out.println("[VoteRoulette] Couldn't add the color for the item: " + itemID + "! Invalid amount of numbers.");
+						System.out.println("[VoteRoulette] Couldn't add the color for the item: " + itemName + "! Invalid amount of numbers.");
 					} else {
 						int red, green, blue;
 						try {
@@ -553,7 +536,7 @@ public class Award {
 							blue = Integer.parseInt(colorValues[2].trim());
 							color = Color.fromRGB(red, green, blue);
 						} catch (Exception e) {
-							System.out.println("[VoteRoulette] Couldn't add the color for the item: " + itemID + "! Invalid number format.");
+							System.out.println("[VoteRoulette] Couldn't add the color for the item: " + itemName + "! Invalid number format.");
 						}
 					}
 				} else {
@@ -561,27 +544,27 @@ public class Award {
 					if (newColor != null) {
 						color = newColor;
 					} else {
-						System.out.println("[VoteRoulette] Couldn't add the color for the item: " + itemID + "! Invalid color name.");
+						System.out.println("[VoteRoulette] Couldn't add the color for the item: " + itemName + "! Invalid color name.");
 					}
 				}
 				if (color == null) {
-					System.out.println("[VoteRoulette] Couldn't add the color for the item: " + itemID + "! Invalid color format.");
+					System.out.println("[VoteRoulette] Couldn't add the color for the item: " + itemName + "! Invalid color format.");
 				} else if (item.getType() == Material.LEATHER_BOOTS || item.getType() == Material.LEATHER_CHESTPLATE || item.getType() == Material.LEATHER_HELMET || item.getType() == Material.LEATHER_LEGGINGS) {
 					LeatherArmorMeta wim = (LeatherArmorMeta) itemMeta;
 					wim.setColor(color);
 					itemMeta = wim;
 				} else {
-					System.out.println("[VoteRoulette] Couldn't add the color for the item: " + itemID + "! Item not leather armor.");
+					System.out.println("[VoteRoulette] Couldn't add the color for the item: " + itemName + "! Item not leather armor.");
 				}
 			}
 			if (itemData.contains("skullOwner")) {
 				String skullOwner = itemData.getString("skullOwner");
-				if (item.getType() == Material.SKULL_ITEM && item.getDurability() == 3 /* playerhead */) {
+				if (item.getType() == Material.PLAYER_HEAD) {
 					SkullMeta sim = (SkullMeta) itemMeta;
 					sim.setOwner(skullOwner);
 					itemMeta = sim;
 				} else {
-					System.out.println("[VoteRoulette] Couldn't add skullOwner for the item: " + itemID + ":" + item.getDurability() + "! Item not a player head.");
+					System.out.println("[VoteRoulette] Couldn't add skullOwner for the item: " + itemName + ":" + item.getDurability() + "! Item not a player head.");
 				}
 			}
 			if (itemData.contains("enchants")) {
@@ -605,7 +588,7 @@ public class Award {
 						Enchantment enchant = Utils.getEnchantEnumFromName(enchantName);
 						int iLevel = Integer.parseInt(level);
 						if (enchant == null) {
-							System.out.println("[VoteRoulette] Couldn't find enchant with the name \"" + enchantName + "\" for the item: " + itemID + "!");
+							System.out.println("[VoteRoulette] Couldn't find enchant with the name \"" + enchantName + "\" for the item: " + itemName + "!");
 							continue;
 						}
 						if (useStorage) {
@@ -614,7 +597,7 @@ public class Award {
 							itemMeta.addEnchant(enchant, iLevel, true);
 						}
 					} catch (Exception e) {
-						System.out.println("[VoteRoulette] Invalid enchant level for \"" + enchantName + "\" for the item: " + itemID + "!");
+						System.out.println("[VoteRoulette] Invalid enchant level for \"" + enchantName + "\" for the item: " + itemName + "!");
 					}
 					if (useStorage) {
 						itemMeta = esm;
@@ -642,7 +625,7 @@ public class Award {
 							PotionEffect pe = new PotionEffect(PotionEffectType.getByName(name), Integer.parseInt(duration), Integer.parseInt(amplifier));
 							pim.addCustomEffect(pe, true);
 						} catch (Exception e) {
-							System.out.println("[VoteRoulette] Invalid potion effect for \"" + name + "\" for the item: " + itemID + "!");
+							System.out.println("[VoteRoulette] Invalid potion effect for \"" + name + "\" for the item: " + itemName + "!");
 						}
 					}
 				}
@@ -657,7 +640,7 @@ public class Award {
 				if (lore == null || lore.isEmpty()) {
 					String loreStr = itemData.getString("lore");
 					if (loreStr.isEmpty()) {
-						System.out.println("[VoteRoulette] The lore for item \"" + itemID + "\" is empty or formatted incorrectly!");
+						System.out.println("[VoteRoulette] The lore for item \"" + itemName + "\" is empty or formatted incorrectly!");
 					} else {
 						String[] loreLines = loreStr.split(",");
 						for (String loreLine : loreLines) {

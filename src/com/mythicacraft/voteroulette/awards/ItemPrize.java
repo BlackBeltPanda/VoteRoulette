@@ -19,21 +19,12 @@ public class ItemPrize extends ItemStack {
 
 	private String amountExpression;
 
-	public ItemPrize(Material material, int amount, short dataID) {
-		super(material, amount, dataID);
-	}
-
 	public ItemPrize(ItemStack is) {
 		super(is);
 	}
 
 	public ItemPrize(Material material, int amount) {
 		super(material, amount);
-	}
-
-	public ItemPrize(Material material, String amountExpression, short dataID) {
-		super(material, 1, dataID);
-		this.amountExpression = amountExpression;
 	}
 
 	public ItemPrize(Material material, String amountExpression) {

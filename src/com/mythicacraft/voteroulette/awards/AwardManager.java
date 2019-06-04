@@ -861,13 +861,13 @@ public class AwardManager {
 				if (multiples != null) {
 					handledItems.add(item.getType());
 					int count = 1;
-					String itemPath = awardPath + "items." + item.getData().getItemTypeId() + ".multiple.";
+					String itemPath = awardPath + "items." + item.getType() + ".multiple.";
 					for (ItemPrize i : multiples) {
 						this.saveItemToPath(itemPath + count + ".", i);
 						count++;
 					}
 				} else {
-					String itemPath = awardPath + "items." + item.getData().getItemTypeId() + ".";
+					String itemPath = awardPath + "items." + item.getType() + ".";
 					this.saveItemToPath(itemPath, item);
 				}
 			}

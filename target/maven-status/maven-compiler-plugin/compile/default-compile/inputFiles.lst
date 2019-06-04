@@ -1,39 +1,39 @@
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\stats\VoterStat.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\FancyMenu.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\VoteRoulette.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\awards\Milestone.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\database\MySQL.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\cmdexecutors\Commands.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\awards\DelayedCommand.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\Utils.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\awards\Prize.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\Expression.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\stats\StatManager.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\UUIDFetcher.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\awards\Reward.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\listeners\VoteProcessor.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\InteractiveMessageAPI\InteractiveMessageElement.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\awardcreator\ACListener.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\Paginate.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\listeners\LoginListener.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\Metrics.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\stats\VoterStatSheet.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\api\PlayerEarnedAwardEvent.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\awards\ItemPrize.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\listeners\AwardListener.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\stats\BoardReset.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\database\Database.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\ConfigAccessor.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\stats\StatUpdater.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\stats\StatWiper.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\awards\AwardManager.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\InteractiveMessageAPI\InteractiveMessage.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\awards\RerollEntry.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\listeners\VoteListener.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\awards\Award.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\database\DatabaseImporter.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\awardcreator\AwardCreator.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\Voter.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\api\PlayerReceivedAwardEvent.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\VoterManager.java
-C:\Users\Erik Bigler\Documents\GitHub\VoteRoulette\src\com\mythicacraft\voteroulette\utils\InteractiveMessageAPI\FormattedText.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\api\PlayerEarnedAwardEvent.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\ConfigAccessor.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\awardcreator\AwardCreator.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\listeners\AwardListener.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\stats\StatUpdater.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\awards\Milestone.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\listeners\VoteProcessor.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\awards\Prize.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\awards\RerollEntry.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\awardcreator\ACListener.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\InteractiveMessageAPI\InteractiveMessage.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\Paginate.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\database\Database.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\stats\BoardReset.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\database\DatabaseImporter.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\VoterManager.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\awards\Award.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\stats\StatWiper.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\stats\StatManager.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\database\MySQL.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\Voter.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\awards\AwardManager.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\awards\ItemPrize.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\UUIDFetcher.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\listeners\VoteListener.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\InteractiveMessageAPI\InteractiveMessageElement.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\awards\DelayedCommand.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\listeners\LoginListener.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\Metrics.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\VoteRoulette.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\stats\VoterStat.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\awards\Reward.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\FancyMenu.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\InteractiveMessageAPI\FormattedText.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\cmdexecutors\Commands.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\stats\VoterStatSheet.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\api\PlayerReceivedAwardEvent.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\Expression.java
+F:\Eclipse\workspace\VoteRoulette\src\com\mythicacraft\voteroulette\utils\Utils.java
