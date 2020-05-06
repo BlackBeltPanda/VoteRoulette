@@ -1460,7 +1460,7 @@ public class Utils {
 			i.addItem(paper);
 		}
 		if ((award.getAwardType() == AwardType.REWARD && (reward.hasWebsites() || reward.hasVoteStreak())) || award.hasChance() || award.hasWorlds() || award.hasReroll() || award.hasDescription() || ((plugin.SHOW_COMMANDS_IN_AWARD || showPlayers) && (award.hasPlayers() || award.hasPermissionGroups())) || award.getAwardType() == AwardType.MILESTONE) {
-			ItemStack sign = new ItemStack(Material.SIGN);
+			ItemStack sign = new ItemStack(Material.BIRCH_SIGN);
 			ItemMeta itemMeta = sign.getItemMeta();
 			itemMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.UNDERLINE + "Details");
 			List<String> lore = new ArrayList<String>();

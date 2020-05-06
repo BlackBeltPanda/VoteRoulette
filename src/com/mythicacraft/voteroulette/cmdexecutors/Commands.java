@@ -454,15 +454,8 @@ public class Commands implements CommandExecutor {
 					if (args.length > 1) {
 						String otherPlayer = args[1];
 						sender.sendMessage(ChatColor.AQUA + "[VoteRoulette] You forced a vote to " + ChatColor.YELLOW + otherPlayer + ChatColor.AQUA + ".");
-						Vote forceVote = new Vote();
-						forceVote.setAddress("1.2.3.4");
-						forceVote.setServiceName("forcevote");
-						if (args.length > 2) {
-							forceVote.setServiceName(args[2]);
-						}
 						Date date = new Date();
-						forceVote.setTimeStamp(String.valueOf(date.getTime()));
-						forceVote.setUsername(otherPlayer);
+						Vote forceVote = new Vote(args.length > 2 ? args[2] : "forcevote", otherPlayer, "1.2.3.4", String.valueOf(date.getTime()));
 						Bukkit.getPluginManager().callEvent(new VotifierEvent(forceVote));
 					}
 				}

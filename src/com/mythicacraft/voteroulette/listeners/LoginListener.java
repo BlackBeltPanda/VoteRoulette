@@ -3,7 +3,6 @@ package com.mythicacraft.voteroulette.listeners;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -82,12 +81,6 @@ public class LoginListener implements Listener {
 						if(!VoteRoulette.notifiedPlayers.contains(player)) {
 							VoteRoulette.notifiedPlayers.add(player);
 						}
-					}
-				}
-
-				if(player.hasPermission("voteroulette.admin")) {
-					if(plugin.hasUpdate()) {
-						player.sendMessage(ChatColor.AQUA + "[VoteRoulette] There is a new version available to download! Visit " + ChatColor.YELLOW + "http://dev.bukkit.org/bukkit-plugins/voteroulette/");
 					}
 				}
 			}

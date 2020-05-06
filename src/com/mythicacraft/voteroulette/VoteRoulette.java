@@ -1,12 +1,8 @@
 package com.mythicacraft.voteroulette;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,9 +22,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
 import com.mythicacraft.voteroulette.awardcreator.ACListener;
 import com.mythicacraft.voteroulette.awardcreator.AwardCreator;
@@ -71,7 +64,6 @@ public class VoteRoulette extends JavaPlugin {
 	private static boolean vaultEnabled = false;
 	private static boolean hasPermPlugin = false;
 	private static boolean hasEconPlugin = false;
-	private boolean hasUpdate = false;
 	public boolean isOn1dot7 = false;
 	public String DEFAULT_ALIAS = "vr";
 
@@ -80,7 +72,6 @@ public class VoteRoulette extends JavaPlugin {
 	private static Database database;
 	private BukkitRunnable periodicReminder;
 	private BukkitRunnable twentyFourHourChecker;
-	private BukkitRunnable updateChecker;
 
 	public static List<Player> notifiedPlayers = new ArrayList<Player>();
 	public static HashMap<Player,Integer> lookingAtRewards = new HashMap<Player,Integer>();
@@ -317,9 +308,6 @@ public class VoteRoulette extends JavaPlugin {
 		if(twentyFourHourChecker != null) {
 			twentyFourHourChecker.cancel();
 		}
-		if(updateChecker != null) {
-			updateChecker.cancel();
-		}
 
 		//run delayed commands
 		this.saveDelayedCommands();
@@ -353,7 +341,7 @@ public class VoteRoulette extends JavaPlugin {
 
 	private boolean setupVault() {
 		Plugin vault =  getServer().getPluginManager().getPlugin("Vault");
-		if (vault != null && vault instanceof net.milkbowl.vault.Vault) {
+		if (vault != null) {
 			System.out.println("[VoteRoulette] Hooked into Vault!");
 			if(!setupEconomy()) {
 				log.warning("[VoteRoulette] No plugin to handle currency, cash rewards will not be given!");
@@ -1202,9 +1190,6 @@ public class VoteRoulette extends JavaPlugin {
 		if(twentyFourHourChecker != null) {
 			twentyFourHourChecker.cancel();
 		}
-		if(updateChecker != null) {
-			updateChecker.cancel();
-		}
 
 		//schedule new ones
 		if(USE_PERIODIC_REMINDER) {
@@ -1215,15 +1200,6 @@ public class VoteRoulette extends JavaPlugin {
 		if(USE_TWENTYFOUR_REMINDER) {
 			twentyFourHourChecker = new TwentyFourHourCheck(TWENTYFOUR_REMINDER);
 			twentyFourHourChecker.runTaskTimerAsynchronously(this, 24000, 24000);
-		}
-
-		if (CHECK_UPDATES) {
-			if (getDescription().getVersion().toLowerCase().contains("snapshot")) {
-				getLogger().info("This is not a release version. Automatic update checking will be disabled.");
-			} else {
-				updateChecker = new UpdateChecker(this);
-				updateChecker.runTaskTimerAsynchronously(this, 40, 432000);
-			}
 		}
 	}
 
@@ -1241,10 +1217,6 @@ public class VoteRoulette extends JavaPlugin {
 
 	public static boolean hasEconPlugin() {
 		return hasEconPlugin;
-	}
-
-	public boolean hasUpdate() {
-		return hasUpdate;
 	}
 
 	public static Plugin getPlugin() {
@@ -1339,62 +1311,6 @@ public class VoteRoulette extends JavaPlugin {
 			catch (NoSuchMethodException ex){} // can never happen
 			catch (InvocationTargetException ex){} // can also never happen
 			catch (IllegalAccessException ex){} // can still never happen
-		}
-	}
-
-	private class UpdateChecker extends BukkitRunnable {
-
-		private String CURRENT_VERSION;
-
-		private final VoteRoulette plugin;
-
-		private UpdateChecker(VoteRoulette plugin) {
-			this.plugin = plugin;
-			CURRENT_VERSION = plugin.getDescription().getVersion();
-		}
-
-		@Override
-		public void run() {
-
-			String latest = null;
-
-			URL url;
-			try {
-				url = new URL("https://api.curseforge.com/servermods/files?projectIds=71726");
-			} catch (final Exception e) {
-				return;
-			}
-
-			URLConnection conn;
-			try {
-
-				conn = url.openConnection();
-				conn.setConnectTimeout(5000);
-				conn.addRequestProperty("User-Agent", "VoteRoulette Update Checker");
-				conn.setDoOutput(true);
-
-				final BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-				final String response = reader.readLine();
-
-				final JSONArray array = (JSONArray) JSONValue.parse(response);
-				if (array.size() == 0) {
-					return;
-				}
-
-				latest = (String) ((JSONObject) array.get(array.size() - 1)).get("name");
-			} catch (final Exception e) {
-			}
-			if (latest != null) {
-				latest = latest.replace("VoteRoulette v", "");
-				if (!CURRENT_VERSION.equals(latest)) {
-					plugin.getLogger().info("There's a different version available: " + latest + " (Current version is: " + CURRENT_VERSION + ")");
-					plugin.getLogger().info("Visit http://dev.bukkit.org/bukkit-plugins/voteroulette/");
-					plugin.getLogger().info("You can disable automatic update checking in the config.");
-					plugin.hasUpdate = true;
-				}
-			} else {
-				this.plugin.getLogger().info("Couldn't check for plugin updates. Will try again later.");
-			}
 		}
 	}
 }

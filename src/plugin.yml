@@ -1,7 +1,7 @@
 main: com.mythicacraft.voteroulette.VoteRoulette
 name: VoteRoulette
 version: 3.2.3
-api-version: 1.13
+api-version: 1.15
 author: ebiggz
 description: A listener for Votifier that gives randomized rewards
 softdepends: [Vault, Votifier]
